@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 import { StyleSheet, Pressable, FlatList, Text, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../_layout";
 
-type Props = NativeStackScreenProps<RootStackParamList, "PostList">;
+type Props = NativeStackScreenProps<any, "PostList">;
 
 const POSTS = [
   {
@@ -36,6 +35,16 @@ export default function PostListScreen({ navigation }: Props) {
   function openSocial() {
     navigation.navigate("Social");
   }
+  // Add a small header button to open the tabs quickly
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Pressable onPress={openSocial} style={styles.headerButton}>
+          <Text style={{ color: '#2f95dc' }}>Onglets</Text>
+        </Pressable>
+      ),
+    });
+  }, [navigation]);
   function renderItem({ item }: { item: (typeof POSTS)[number] }) {
     return (
       <Pressable
@@ -48,16 +57,14 @@ export default function PostListScreen({ navigation }: Props) {
         }
         style={({ pressed }) => [styles.item, pressed && styles.itemPressed]}
       >
-        <Text>{item.title}</Text>
+        <Text style={styles.itemTitle}>{item.title}</Text>
+        <Text style={styles.itemSnippet}>{item.content.slice(0, 100)}{item.content.length > 100 ? '…' : ''}</Text>
       </Pressable>
     );
   }
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={openSocial} style={styles.socialButton}>
-        <Text>Open Social Tabs</Text>
-      </Pressable>
       <FlatList
         data={POSTS}
         keyExtractor={(item) => item.id}
@@ -91,5 +98,22 @@ const styles = StyleSheet.create({
     margin: 16,
     borderRadius: 8,
     alignItems: "center",
+  },
+  socialButtonText: {
+    color: '#2f95dc',
+    fontWeight: '600',
+  },
+  headerButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+  },
+  itemTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 4,
+  },
+  itemSnippet: {
+    color: '#666',
+    fontSize: 14,
   },
 });
