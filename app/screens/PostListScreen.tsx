@@ -33,6 +33,9 @@ const POSTS = [
 ];
 
 export default function PostListScreen({ navigation }: Props) {
+  function openSocial() {
+    navigation.navigate("Social");
+  }
   function renderItem({ item }: { item: (typeof POSTS)[number] }) {
     return (
       <Pressable
@@ -52,6 +55,9 @@ export default function PostListScreen({ navigation }: Props) {
 
   return (
     <View style={styles.container}>
+      <Pressable onPress={openSocial} style={styles.socialButton}>
+        <Text>Open Social Tabs</Text>
+      </Pressable>
       <FlatList
         data={POSTS}
         keyExtractor={(item) => item.id}
@@ -78,5 +84,12 @@ const styles = StyleSheet.create({
   },
   itemPressed: {
     opacity: 0.7,
+  },
+  socialButton: {
+    padding: 12,
+    backgroundColor: "rgba(47,149,220,0.12)",
+    margin: 16,
+    borderRadius: 8,
+    alignItems: "center",
   },
 });
