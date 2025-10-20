@@ -1,16 +1,17 @@
 import "react-native-reanimated";
+import * as React from "react";
+import CourseTabs from "./CourseTabs";
+import ProfileScreen from "./screens/ProfileScreen";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import PostListScreen from "./screens/PostListScreen";
-import PostDetailScreen from "./screens/PostDetailScreen";
-
-export type RootStackParamList = {
-  PostList: undefined;
-  PostDetail: { postId: string; title: string; content: string };
-};
+const Drawer = createDrawerNavigator();
 
 export default function RootLayout() {
-  const Stack = createNativeStackNavigator<RootStackParamList>();
-
-  return <>{/* Your code here for the stack navigator */}</>;
+  // Drawer at the root exposes the different app roots (Shop and Social).
+  return (
+    <Drawer.Navigator initialRouteName="Courses">
+      <Drawer.Screen name="Courses" component={CourseTabs} options={{ title: "Courses", headerShown: false }} />
+      <Drawer.Screen name="MyProfile" component={ProfileScreen} options={{ title: "My Profile" }} />
+    </Drawer.Navigator>
+  );
 }

@@ -20,9 +20,8 @@ export function Collapsible({ children, title }: PropsWithChildren & { title: st
         <IconSymbol
           name="chevron.right"
           size={18}
-          weight="medium"
           color={theme === 'light' ? Colors.light.icon : Colors.dark.icon}
-          style={{ transform: [{ rotate: isOpen ? '90deg' : '0deg' }] }}
+          // style prop intentionally omitted in stub
         />
 
         <ThemedText type="defaultSemiBold">{title}</ThemedText>
