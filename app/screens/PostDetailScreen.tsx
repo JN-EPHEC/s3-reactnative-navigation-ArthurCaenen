@@ -9,9 +9,10 @@ export default function PostDetailScreen({ route }: Props) {
   const { title, content } = route.params;
 
   return (
-    <View style={styles.container}>
-      {/* Replace this with your code for the details of an item, use properties ! */}
-    </View>
+    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.body}>{content}</Text>
+    </ScrollView>
   );
 }
 
