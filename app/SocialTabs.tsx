@@ -22,17 +22,18 @@ export default function SocialTabs() {
         tabBarActiveTintColor: "#2f95dc",
         tabBarInactiveTintColor: "gray",
         tabBarIcon: ({ color }) => {
-          // simple emoji icons
-          if (route.name === "Home") return <Text style={{ fontSize: 18 }}>🏠</Text>;
-          if (route.name === "Profile") return <Text style={{ fontSize: 18 }}>👤</Text>;
-          if (route.name === "Settings") return <Text style={{ fontSize: 18 }}>⚙️</Text>;
+          // simple emoji icons colored to match active/inactive tint
+          const style = { fontSize: 18, color } as const;
+          if (route.name === "Home") return <Text style={style}>🏠</Text>;
+          if (route.name === "Profile") return <Text style={style}>👤</Text>;
+          if (route.name === "Settings") return <Text style={style}>⚙️</Text>;
           return null;
         },
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} options={{ title: "Home" }} />
-      <Tab.Screen name="Profile" component={ProfileScreen} options={{ title: "Profile" }} />
-      <Tab.Screen name="Settings" component={SettingsScreen} options={{ title: "Settings" }} />
+      <Tab.Screen name="Home" component={HomeScreen} options={{ title: "Accueil", tabBarLabel: "Accueil" }} />
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{ title: "Profil", tabBarLabel: "Profil" }} />
+      <Tab.Screen name="Settings" component={SettingsScreen} options={{ title: "Paramètres", tabBarLabel: "Paramètres" }} />
     </Tab.Navigator>
   );
 }
