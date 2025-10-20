@@ -9,6 +9,7 @@ export type RootStackParamList = {
   PostList: undefined;
   PostDetail: { postId: string; title: string; content: string };
   Social: undefined;
+  Shop: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -31,6 +32,11 @@ export default function RootLayout() {
         name="Social"
         component={SocialTabs}
         options={{ title: "Social" }}
+      />
+      <Stack.Screen
+        name="Shop"
+        component={require("./ShopTabs").default}
+        options={{ title: "Shop" }}
       />
     </Stack.Navigator>
   );
